@@ -2,7 +2,7 @@
 socket.emit('message', "this is a test");
 
 // sending to all clients, include sender
-io.emit('message', "this is a test");
+io.sockets.emit('message', "this is a test");
 
 // sending to all clients except sender
 socket.broadcast.emit('message', "this is a test");

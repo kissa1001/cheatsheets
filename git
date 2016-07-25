@@ -1,0 +1,123 @@
+master	default branch we develop in
+origin	default upstream repo (Github)
+HEAD	current branch
+remote	repository stored on another computer
+staging (adding)	adding changed files to index tree to be committed
+
+#Starting a Repo init/clone/remote
+
+//Create a repo from existing data
+	git init
+//Clone a current repo (into a folder with same name as repo)
+	git clone (repo_url)
+//Clone a repo into a specific folder name
+	git clone (repo_url) (folder_name)	
+//Clone a repo into current directory (should be an empty directory)
+	git clone (repo_url) .
+//Create a remote repo named origin pointing at your Github repo (after you’ve already created the repo on Github) (used if you git init since the repo you created locally isn’t linked to a remote repo yet)
+	git remote add origin https://github.com/username/(repo_name).git
+//Create a remote repo named origin pointing at your Github repo (using SSH url instead of HTTP url)
+	git remote add origin git@github.com:username/(repo_name).git
+//Show the names of the remote repositories you’ve set up
+	git remote
+//Show the names and URLs of the remote repositories
+	git remote -v
+//Remove a remote repository
+	git remote rm (remote_name)
+//Change the URL of the git repo
+	git remote set-url origin (git_url)
+//Push your changes to the origin
+	git push
+
+#Showing Changes status/diff/log/blame
+
+//Show the files changed
+	git status
+//Show changes to files compared to last commit
+	git diff
+//Show changes in single file compared to last commit
+	git diff (filename)
+//Show changes between two different commits.
+	git diff (commit_id)
+//Show history of changes
+	git log
+//Show who changed each line of a file and when
+	git blame(filename)
+
+#Undoing Changes reset/revert
+
+//Go back to the last commit (will not delete new unstaged files)
+	git reset -hard
+//Undo/revert last commit AND create a new commit
+	git revert HEAD
+//Undo/revert a specific commit AND create a new commit
+	git revert(commit_id)
+
+#Staging Files add/rm
+
+//Stage all files (new, modified, and deleted)
+	git add -A
+//Stage new and modified files (not deleted)
+	git add .
+//Stage modified and deleted files (not new)
+	git add -u
+//Remove a file and untrack it
+	git rm (filename)
+//Untrack a file only. It will still exist. Usually you will add this file to .gitignore after rm
+	git rm (filename) –cached	
+
+#Publishing commit/stash/push
+
+//Commit the local changes that were staged
+	git commit -m “message”
+//Stage files (modified and deleted, not new) and commit
+	git commit -am “message”
+//Take the uncommitted work (modified tracked files and staged changes) and saves it
+	git stash
+//Show list of stashes
+	git stash list
+//Reapply the latest stashed contents
+	git stash apply
+//Push your changes to the origin
+	git push
+//Push a branch to the origin
+	git push origin (local_branch_name)
+
+#Updating and Getting Code fetch/pull
+
+//Get the latest changes from origin (don’t merge)
+	git fetch
+//Get the latest changes from origin AND merge
+	git pull
+//Get a remote branch from origin into a local branch (naming the branch and switching to it)
+	git checkout -b (new_branch_name) origin/(branch_name)
+
+#Branching branch/checkout
+
+//Show all branches (local)
+	git branch	
+//Show all branches (local and remote)
+	git branch -a
+//Create a branch from HEAD
+	git branch (branch_name)
+//Create a new branch and switch to it
+	git checkout -b (branch_name)	
+//Switch to an already created branch
+	git checkout (branch_name)
+//Push a branch up to the origin (Github)
+	git push origin (branch_name)
+//Get a remote branch from origin into a local branch (naming the branch and switching to it)
+	git checkout -b (new_branch_name) origin/(branch_name)
+//Delete a branch locally and remotely
+	git push origin –delete (branch_name)	
+
+#Integrating Branches merge/rebase
+
+//Merge a specific branch into the master branch.
+	git checkout master
+	git merge (branch_name)
+//Take all the changes in one branch and replay them on another. Usually used in a feature branch. Rebase the master to the feature branch so you are testing your feature on the latest main code base. Then merge to the master.
+	git rebase (branch_name)	
+//Merge just one specific commit from another branch to your current branch.
+	git cherry-pick (commit_id)
+	
